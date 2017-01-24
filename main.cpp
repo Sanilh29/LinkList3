@@ -2,6 +2,7 @@
 #include <cstring>
 #include <iomanip>
 #include "Student.h"
+#include "Node.h"
 
 using namespace std;
 
@@ -13,21 +14,22 @@ void averageGPA(Node* &h);
 int main() {
   char command[10];
   bool playing = true;
+  Node* h = NULL;
   while (playing == true){
     cout << "Enter one of the commands listed: add, delete, print, average, or quit." << endl;
     cin >> command;
-    Node* head = NULL;
+    cin.ignore();
     if (0== strcmp(command, "add")){
-      addStudent(Node* &h);
+      addStudent(h);
     }
     if (0== strcmp(command, "delete")){
-      deleteStudent(Node* &h);
+      deleteStudent(h);
     }
     if (0== strcmp(command, "print")){
-      printStudent(Node* &h);
+      printStudent(h);
     }
     if (0== strcmp(command, "average")){
-      averageGPA(Node* &h);
+      averageGPA(h);
     }
     if (0== strcmp(command, "quit")){
       playing = false;
@@ -38,17 +40,22 @@ int main() {
 void addStudent(Node* &h){
   Node* n = new Node;
   Student* s = new Student;
-  n.setNext(head);
-  n.setStudent(s);
-  head = n;
+  n->setNext(h);
+  n->setStudent(s);
+  h = n;
 }
 
 void deleteStudent(Node* &h){
-
+  
 }
 
 void printStudent(Node* &h){
-
+  for (Node* currentNode = h; currentNode != NULL; currentNode = currentNode->getNext()){
+    cout << "Name: " << currentNode->getStudent()->getFirst() << " "<< currentNode->getStudent()->getLast() << endl;
+    cout << "ID: " << currentNode->getStudent()->getID() << endl;
+    cout << "GPA: " << currentNode->getStudent()->getGPA() << endl;
+    cout << endl;
+  }
 }
 
 void averageGPA(Node* &h){
