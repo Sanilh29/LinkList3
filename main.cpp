@@ -53,8 +53,9 @@ void deleteStudent(Node* &h){
   Node* n = h;
   while (h != NULL){
     if (currentNode->getStudent()->getID() == deleted){
+      previous = n;
       n = n.getNext();
-      previous 
+      delete n;
     }
   }
 }
