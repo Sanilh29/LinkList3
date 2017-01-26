@@ -46,19 +46,37 @@ void addStudent(Node* &h){
 }
 
 void deleteStudent(Node* &h){
-  
+  int deleted;
+  cout << "What's the person's ID that you wish to delete?" << endl;
+  cin >> deleted;
+  Node* previous = NULL;
+  Node* n = h;
+  while (h != NULL){
+    if (currentNode->getStudent()->getID() == deleted){
+      n = n.getNext();
+      previous 
+    }
+  }
 }
 
 void printStudent(Node* &h){
   for (Node* currentNode = h; currentNode != NULL; currentNode = currentNode->getNext()){
     cout << "Name: " << currentNode->getStudent()->getFirst() << " "<< currentNode->getStudent()->getLast() << endl;
     cout << "ID: " << currentNode->getStudent()->getID() << endl;
-    cout << "GPA: " << currentNode->getStudent()->getGPA() << endl;
+    cout << "GPA: " << setprecision(2) << fixed << currentNode->getStudent()->getGPA() << endl;
     cout << endl;
   }
 }
 
 void averageGPA(Node* &h){
-
+  int count =0;
+  float gpa=0;
+  cout << endl;
+  for (Node* currentNode = h; currentNode != NULL; currentNode = currentNode->getNext()){
+    count++;
+    gpa += currentNode->getStudent()->getGPA();
+  }
+  gpa/=count;
+  cout << "Average GPA:" << setprecision(2) << fixed << gpa << endl;
 }
 
