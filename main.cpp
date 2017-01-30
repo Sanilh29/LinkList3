@@ -45,17 +45,26 @@ void addStudent(Node* &h){
   h = n;
 }
 
-void deleteStudent(Node* &h){
+void deleteStudent(Node* &h){//deleting the node with head
   int deleted;
   cout << "What's the person's ID that you wish to delete?" << endl;
   cin >> deleted;
   Node* previous = NULL;
   Node* n = h;
-  while (h != NULL){
-    if (currentNode->getStudent()->getID() == deleted){
-      previous = n;
-      n = n.getNext();
-      delete n;
+  if (n->getStudent()->getID() == deleted){
+    while (n != NULL){
+      if (h==n){
+	Node* toDelete = n;
+	n = n->getNext();
+	if(previous) {
+	  previous->setNext(n);
+	}
+	delete toDelete;
+	cout << "The student is deleted" << endl;
+      }
+    else {
+      n = n->getNext();
+    }
     }
   }
 }
