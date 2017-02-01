@@ -1,10 +1,13 @@
+//Sanil Hattangadi
 #include <cstring>
 #include <iostream>
 
 using namespace std;
 
+
 class Student{
  private:
+  //has the variables
   char* firstname;
   char* lastname;
   float gpa;
@@ -12,6 +15,7 @@ class Student{
  public:
   Student();
   ~Student();
+  //gets the info
   char* getFirst();
   char* getLast();
   float getGPA();
