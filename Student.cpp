@@ -1,11 +1,11 @@
-
+//Sanil Hattangadi. student.cpp
 #include <cstring>
 #include <iostream>
 #include "Student.h"
 
 using namespace std;
 
-Student::Student(){
+Student::Student(){//gets the info for the student: first name, last name, gpa, id
   firstname = new char[32];
   lastname = new char[32];
   cout << "What's the students first name?" << endl;
@@ -26,18 +26,18 @@ Student::~Student(){
 
 }
 
-char* Student::getFirst(){
+char* Student::getFirst(){//returns first name
   return firstname;
 }
 
-char* Student::getLast(){
+char* Student::getLast(){//returns last name
   return lastname;
 }
 
-float Student::getGPA(){
+float Student::getGPA(){//returns gpa
   return gpa;
 }
 
-int Student::getID(){
+int Student::getID(){//returns ID
   return id;
 }
