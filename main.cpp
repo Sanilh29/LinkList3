@@ -10,15 +10,15 @@
 
 using namespace std;
 //methods i use
-void addStudent(Node* &h);
-void deleteStudent(Node* &h);
-void printStudent(Node* &h);
-void averageGPA(Node* &h);
+void addStudent(Node* h);
+void deleteStudent(Node* current, Node* previous, int deleted);
+void printStudent(Node* h);
+void averageGPA(Node* h);
 
 int main() {//gets the input for add, quit, delete, and average
+  Node* h = new Node(NULL);
   char command[10];
   bool playing = true;
-  Node* h = NULL;
   while (playing == true){
     cout << "Enter one of the commands listed: add, delete, print, average, or quit." << endl;
     cin >> command;
@@ -27,13 +27,17 @@ int main() {//gets the input for add, quit, delete, and average
       addStudent(h);
     }
     if (0== strcmp(command, "delete")){//do delete method
-      deleteStudent(h);
+      int deleted;
+      cout << "What's the ID of the person you wish to delete?" << endl;
+      cin >> deleted;
+      cin.ignore();
+      deleteStudent(h->getNext(), h, deleted);
     }
     if (0== strcmp(command, "print")){//print out the studebts
-      printStudent(h);
+      printStudent(h->getNext());
     }
     if (0== strcmp(command, "average")){//average student GPa
-      averageGPA(h);
+      averageGPA(h->getNext());
     }
     if (0== strcmp(command, "quit")){//quit program
       playing = false;
@@ -41,16 +45,34 @@ int main() {//gets the input for add, quit, delete, and average
   }
 }
 
-void addStudent(Node* &h){//add the students to the link list
-  Node* n = new Node; //create a new node
+void addStudent(Node* h){//add the students to the link list
+  /* Node* n = new Node; //create a new node
   Student* s = new Student;//create a student
   n->setNext(h);//set the node to the front
   n->setStudent(s);//set the student to the node
   h = n;
+}*/
+  if(h->getNext()){
+    addStudent(h->getNext());
+  } 
+  else {
+    h->setNext(new Node(new Student));
+  }
 }
 
-void deleteStudent(Node* &h){//deleting a student with a given ID
-  int deleted;
+void deleteStudent(Node* current, Node * previous, int deleted){//deleting a student with a given ID
+  if (current->getStudent()->getID() == deleted){
+    previous->setNext(current->getNext());
+    delete current;
+  }
+  else if (current->getNext()){
+    deleteStudent(current->getNext(), current, deleted);
+  }
+  else {
+    cout << "There is no student with that ID." << endl;
+  }
+}
+  /* int deleted;
   cout << "What's the person's ID that you wish to delete?" << endl;
   cin >> deleted;
   Node* previous = NULL;
@@ -73,17 +95,29 @@ void deleteStudent(Node* &h){//deleting a student with a given ID
     previous = n;
     n = n->getNext();
   }
-}
-void printStudent(Node* &h){//prints the students out
-  for (Node* currentNode = h; currentNode != NULL; currentNode = currentNode->getNext()){//as you go through the link list
+  }*/
+
+void printStudent(Node* h){//prints the students out
+  /* for (Node* currentNode = h; currentNode != NULL; currentNode = currentNode->getNext()){//as you go through the link list
     cout << "Name: " << currentNode->getStudent()->getFirst() << " "<< currentNode->getStudent()->getLast() << endl;
     cout << "ID: " << currentNode->getStudent()->getID() << endl;
     cout << "GPA: " << setprecision(2) << fixed << currentNode->getStudent()->getGPA() << endl;
     cout << endl;
   }//print all this out
+}*/
+  if(!h){
+    return;
+  }
+  cout << "Name: " << h->getStudent()->getFirst() << " " << h->getStudent()->getLast() << endl;
+  cout << "GPA: " << setprecision(2) << fixed << h->getStudent()->getGPA() << endl;
+  cout << "ID: " << h->getStudent()->getID() << endl;
+  cout << endl;
+  if (h->getNext()){
+    printStudent(h->getNext());
+  }
 }
 
-void averageGPA(Node* &h){//get the average gpa
+void averageGPA(Node* h){//get the average gpa
   int count =0;
   float gpa=0;
   cout << endl;

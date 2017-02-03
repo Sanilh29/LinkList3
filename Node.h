@@ -1,17 +1,28 @@
+#ifndef NODE_H
+#define NODE_H
 #include <iostream>
 #include <cstring>
-#include <vector>
+
+using namespace std;
+
+class Student;
 
 class Node{
-	private:
-		Node* next;
-		Student* student;
-	public:
-		Node();
-		Node(Student*);
-		~Node();
-		Node* getNext();
-		Student* getStudent();
-		void setNext(Node*);
-		void setStudent(Student*);
-};
+private:
+Student* info;
+Node* next;
+//int value; //G's example
+ public:
+ Node(Student* student);//constructor
+ ~Node();//deconstructor
+ Node* getNext();//get next node pointer
+ Student* getStudent();//get student pointer
+ Node* end(); //returns the current node
+ //void erase();
+ void push_back(Student* student);//sets student info
+ void setNext(Node* newNext);//set the next pointer to the corresponding node pointer
+ //void setValue(int newValue);//G's example
+ //int getValue(); //G's example
+  };
+
+#endif

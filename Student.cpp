@@ -23,7 +23,8 @@ Student::Student(){//gets the info for the student: first name, last name, gpa, 
 }
 
 Student::~Student(){
-
+  delete firstname;
+  delete lastname;
 }
 
 char* Student::getFirst(){//returns first name
