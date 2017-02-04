@@ -31,7 +31,7 @@ int main() {//gets the input for add, quit, delete, and average
       cout << "What's the ID of the person you wish to delete?" << endl;
       cin >> deleted;
       cin.ignore();
-      deleteStudent( h, NULL, deleted);
+      deleteStudent(h, NULL, deleted);
     }
     if (0== strcmp(command, "print")){//print out the studebts
       printStudent(h->getNext());
@@ -62,11 +62,9 @@ void addStudent(Node* h){//add the students to the link list
 
 void deleteStudent(Node* current, Node * previous, int deleted){//deleting a student with a given ID
   if (current->getStudent() != NULL){
-    if (current->getStudent()->getID() == deleted){
-      if (previous != NULL){ 
+    if (current->getStudent()->getID() == deleted){ 
 	previous->setNext(current->getNext());
-      }
-      delete current;
+	delete current;
     }
   }
   else if (current->getNext()){
