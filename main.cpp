@@ -10,7 +10,7 @@
 
 using namespace std;
 //methods i use
-void addStudent(Node* h);
+void addStudent(Node* h, Student* student);
 void deleteStudent(Node* current, Node* previous, int deleted);
 void printStudent(Node* h);
 void averageGPA(Node* h);
@@ -24,7 +24,7 @@ int main() {//gets the input for add, quit, delete, and average
     cin >> command;
     cin.ignore();
     if (0== strcmp(command, "add")){ //do add method
-      addStudent(h);
+      addStudent(h, new Student);
     }
     if (0== strcmp(command, "delete")){//do delete method
       int deleted;
@@ -32,6 +32,7 @@ int main() {//gets the input for add, quit, delete, and average
       cin >> deleted;
       cin.ignore();
       deleteStudent(h, NULL, deleted);
+      cout << "Student deleted." << endl;
     }
     if (0== strcmp(command, "print")){//print out the studebts
       printStudent(h->getNext());
@@ -45,36 +46,40 @@ int main() {//gets the input for add, quit, delete, and average
   }
 }
 
-void addStudent(Node* h){//add the students to the link list
-  /* Node* n = new Node; //create a new node
-  Student* s = new Student;//create a student
-  n->setNext(h);//set the node to the front
-  n->setStudent(s);//set the student to the node
-  h = n;
-}*/
-  if(h->getNext() != NULL){
+void addStudent(Node* h, Student* student){//add the students to the link list and sorts them by ID
+  if (!h->getNext()){
+    h->setNext(new Node(student));
+  }
+  else if(h->getNext()->getStudent()->getID() > student->getID()){// if the next students ID is greater than you ID
+    Node* temp = h->getNext();//set a temp var for next node
+    h->setNext(new Node(student));//set the new student as next
+    h->getNext()->setNext(temp);//set the temp as the next node after new student
+  }
+  else{
+    addStudent(h->getNext(), student);//keep going through list
+  }
+}
+  /*if(h->getNext() != NULL){
     addStudent(h->getNext());
   } 
   else {
     h->setNext(new Node(new Student));
   }
-}
-
+  }*/
+  
 void deleteStudent(Node* current, Node * previous, int deleted){//deleting a student with a given ID
-  if (current->getStudent() != NULL){
-    if (current->getStudent()->getID() == deleted){ 
-	previous->setNext(current->getNext());
-	delete current;
-    }
+  if (current->getStudent() != NULL && current->getStudent()->getID() == deleted){//if inputted ID is equal 
+    previous->setNext(current->getNext());//set the previous node to connect with the node 2 spots ahead
+    delete current;//delete current
   }
-  else if (current->getNext()){
-      deleteStudent(current->getNext(), current, deleted);
+  else if (current->getNext()){//if ID isnt equal
+    deleteStudent(current->getNext(), current, deleted);//keep going through list
   }
   else {
     cout << "There is no student with that ID." << endl;
   }
 }
-  /* int deleted;
+/*int deleted;
   cout << "What's the person's ID that you wish to delete?" << endl;
   cin >> deleted;
   Node* previous = NULL;
@@ -110,10 +115,12 @@ void printStudent(Node* h){//prints the students out
   if(!h){
     return;
   }
+  //print out all the info
   cout << "Name: " << h->getStudent()->getFirst() << " " << h->getStudent()->getLast() << endl;
   cout << "GPA: " << setprecision(2) << fixed << h->getStudent()->getGPA() << endl;
   cout << "ID: " << h->getStudent()->getID() << endl;
   cout << endl;
+  // if next node isnt null, print it
   if (h->getNext()){
     printStudent(h->getNext());
   }

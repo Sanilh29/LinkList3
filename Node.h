@@ -1,3 +1,4 @@
+//Sanil Hattangadi, the Node header that contains my methods and variables
 #ifndef NODE_H
 #define NODE_H
 #include <iostream>

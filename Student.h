@@ -1,4 +1,6 @@
-//Sanil Hattangadi
+//Sanil Hattangadi, contains all the variables and methods for student cpp
+#ifndef STUDENT_H
+#define STUDENT_H
 #include <cstring>
 #include <iostream>
 
@@ -13,11 +15,13 @@ class Student{
   float gpa;
   int id;
  public:
-  Student();
-  ~Student();
+  Student();//creates student
+  ~Student();//deletes the student
   //gets the info
-  char* getFirst();
-  char* getLast();
-  float getGPA();
-  int getID();
+  char* getFirst();//get firstname
+  char* getLast();//get last name
+  float getGPA();//get gpa
+  int getID();//get ID
 };
+
+#endif

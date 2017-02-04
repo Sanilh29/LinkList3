@@ -1,4 +1,4 @@
-//Sanil Hattangadi. student.cpp
+//Sanil Hattangadi. student.cpp that gets all the info
 #include <cstring>
 #include <iostream>
 #include "Student.h"
@@ -22,7 +22,7 @@ Student::Student(){//gets the info for the student: first name, last name, gpa, 
   cin.ignore();
 }
 
-Student::~Student(){
+Student::~Student(){//deletes name
   delete firstname;
   delete lastname;
 }
