@@ -1,4 +1,4 @@
-#include <iostream>
+B#include <iostream>
 #include "Node.h"
 #include <cstring>
 
@@ -41,6 +41,6 @@ int Node::getValue(){
   }*/
 
 Node::~Node() {
-  delete &info;
+  delete info;
   next = NULL;
 }
